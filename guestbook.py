@@ -18,7 +18,8 @@ class Guestbook(object):
                     '-y', f"./messages/message_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}.mp3"]
             )
         outproc = subprocess.Popen(
-            ['ffplay','-loglevel','quiet','-nodisp','-autoexit','greeting.mp3'], 
+            ['ffplay','-loglevel','quiet','-nodisp','-autoexit',
+                '-f','concat','-i','greeting.list'], 
             env=dict(os.environ, SDL_AUDIODRIVER="alsa", AUDIODEV="plughw:CARD=Audio,DEV=0")
             )
         self.hookswitch.wait_for_release()

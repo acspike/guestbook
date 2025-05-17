@@ -3,6 +3,7 @@
 *.deb
 *.log
 *.json
+!beep.mp3
 
 
 # pinout

@@ -1,5 +1,9 @@
-# recordings
+# misc
 *.mp3
+*.deb
+*.log
+*.json
+
 
 # pinout
 .lgd-nfy*

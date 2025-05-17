@@ -1,0 +1,6 @@
+[Unit]
+Description=Sync messages folder to Google Drive
+
+[Service]
+Type=oneshot
+ExecStart=/opt/guestbook/sync_messages.sh

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run guestbook sync every 10 minutes
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=10min
+Unit=guestbook_sync.service
+
+[Install]
+WantedBy=timers.target

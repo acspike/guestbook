@@ -1,0 +1,29 @@
+# Guestbook Google Drive
+# sudo cp /opt/guestbook/guestbook_gdrive.service /etc/systemd/system/guestbook_gdrive.service
+# sudo chmod 644 /etc/systemd/system/guestbook_gdrive.service
+# sudo systemctl daemon-reload
+# sudo systemctl enable guestbook_gdrive.service
+[Unit]
+Description=Rclone Mount for Guestbook Google Drive
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/rclone mount guestbook:/GuestbookMessages /opt/guestbook/messages \
+    --config=/home/spike/.config/rclone/rclone.conf \
+    --vfs-cache-mode writes \
+    --allow-other \
+    --allow-non-empty \
+    --uid=1000 --gid=1000 \
+    --umask=002 \
+    --buffer-size=64M \
+    --poll-interval=1m
+ExecStop=/bin/fusermount3 -u /opt/guestbook/messages
+Restart=on-failure
+User=spike
+Group=spike
+TimeoutSec=30
+
+[Install]
+WantedBy=default.target

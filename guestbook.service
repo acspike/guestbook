@@ -1,0 +1,21 @@
+# Guestbook
+# sudo cp /opt/guestbook/guestbook.service /etc/systemd/system/guestbook.service
+# sudo chmod 644 /etc/systemd/system/guestbook.service
+# sudo systemctl daemon-reload
+# sudo systemctl enable guestbook.service
+[Unit]
+Description=Guestbook
+After=multi-user.target
+[Service]
+Type=simple
+User=spike
+Group=spike
+WorkingDirectory=/opt/guestbook
+StandardOutput=journal
+StandardError=journal
+ExecStart=/usr/bin/env python /opt/guestbook/guestbook.py
+Restart=always
+RestartSec=5s
+ExecStopPost=/opt/guestbook/sync_messages.sh
+[Install]
+WantedBy=multi-user.target
